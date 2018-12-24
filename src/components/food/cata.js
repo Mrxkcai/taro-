@@ -36,7 +36,7 @@ class Cata extends Component {
                     id:'7'
                 }
             ],
-            selectCata:null 
+            selectCata:null
         }
     }
     clickHandle(item){
