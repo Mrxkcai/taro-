@@ -11,6 +11,7 @@ class Addcut extends Component{
         }
     }
 
+    //react生命周期
     componentDidMount(){
         this.setState({Num:getFoodCount(this.props.food)})
     }

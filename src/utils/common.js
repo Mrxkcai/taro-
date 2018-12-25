@@ -1,4 +1,4 @@
-// 获取数量
+// 获取菜品数量
 export function getFoodCount(food){
 
 }
