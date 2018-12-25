@@ -6,7 +6,7 @@ import Cata from './cata';
 import FoodList from './foodList'
 
 import './food.less'
-import { func } from '../../../node_modules/_@types_react@16.7.17@@types/react/node_modules/@types/prop-types';
+
 
 class Food extends Component {
     constructor(){
@@ -15,7 +15,8 @@ class Food extends Component {
             current:0,
             tabList:[{title:'点菜'},{title:'评价'},{title:'商家'}],
             foodList:[],
-            currentList:[]
+            currentList:[],
+            selectCata:null 
         }
     }
     changeTab(value){
@@ -24,6 +25,7 @@ class Food extends Component {
         })
     }
     changeCata(selectCata){
+        this.setState({selectCata:selectCata})
         if(this.state.foodList.some(item => item.pid == selectCata.id)){
             //you
             this.setState({
@@ -41,8 +43,17 @@ class Food extends Component {
         }
     }
     getData(selectCata){
-        // Array.from(Array(Math.round(Math.random()*20)), (v,k) => ({}))
-        return []
+        //模拟数据
+        let count = Math.round(Math.random()*2);
+        let imgUrl = `./${count}.jpg`;
+        return Array.from(Array(Math.round(Math.random()*20)), (v,k) => ({
+            img:imgUrl,
+            pid:selectCata.id,
+            id:selectCata.id+'_'+k,
+            title:'分类'+selectCata.id+'菜品'+(k+1),
+            sole:Math.round(Math.random()*50),
+            price:Math.round(Math.random()*20)
+        }))
     }
     render(){
         let {current,tabList,currentList} = this.state;
@@ -52,7 +63,7 @@ class Food extends Component {
                     <AtTabsPane>
                         <View className='food_body'>
                             <Cata onchangeCata={this.changeCata.bind(this)} />
-                            <FoodList currentList={currentList} />
+                            <FoodList selectCata={this.state.selectCata} currentList={currentList} />
                         </View>
                     </AtTabsPane>
                     <AtTabsPane>
